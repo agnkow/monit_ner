@@ -7,3 +7,6 @@ from .embdrift import extract_tokens_vectors, \
                             drift_js, \
                             drift_kl, \
                             oov_rate
+
+from .report import data_drift_report
+from .reportemd import data_emb_report
