@@ -3,7 +3,27 @@
 
 ### Data Drift
 
+* Średnia długość tekstu:
+  - średnia liczba tokenów
+  - średnia liczba słów
+  - średnia liczba zdań
+ <p></p>
+
+* Procentowy udział w tekście:
+  - słów
+  - cyfr
+  - interpunkcji
+  - słów rozpoczynających się wielką literą
+  - tagów POS
+ <p></p>
+
+* Test Kolmogorova-Smirnova dla:
+  - rozkładu liczby tokenów na zdanie
+  - rozkładu liczby encji na zdanie
+ <p></p>
+
 ### Embedding Drift
+
 
 ### Prediction Drift
 
