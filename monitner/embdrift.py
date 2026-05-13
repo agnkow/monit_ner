@@ -48,7 +48,7 @@ def centroid_vecs(vectors):
         return None
 
     vecs = np.vstack(vectors)
-    vecs = vecs[np.linalg.norm(vecs, axis=1) > 0]  # usuwam zerowe wektory
+    vecs = vecs[np.linalg.norm(vecs, axis=1) > 0]  # remove zero vectors
 
     if vecs.shape[0] == 0:
         return None

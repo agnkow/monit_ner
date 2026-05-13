@@ -31,7 +31,7 @@ def data_emb_report(
     print('\n')
 
     # OOV / new tokens
-    print("OOV rate (tokeny):", oov_rate(df_token_a, df_token_b, 'token_lower'))
+    print("OOV rate (tokens):", oov_rate(df_token_a, df_token_b, 'token_lower'))
     print('\n')
 
     # --------------- Entities ---------------
