@@ -87,22 +87,22 @@ def entity_centroid_drift(df_a, df_b, label):
 #----------------   Distribution drift    -----------------#
 def entity_distribution(df_a, df_b):
 
-    distrib_a = df_a.entity.value_counts(normalize=True)
-    distrib_b = df_b.entity.value_counts(normalize=True)
+    dist_a = df_a.entity.value_counts(normalize=True)
+    dist_b = df_b.entity.value_counts(normalize=True)
 
-    all_entities = distrib_a.index.union(distrib_b.index)
+    all_entities = dist_a.index.union(dist_b.index)
 
-    distrib_a = distrib_a.reindex(all_entities, fill_value=0)
-    distrib_b = distrib_b.reindex(all_entities, fill_value=0)
+    dist_a = dist_a.reindex(all_entities, fill_value=0)
+    dist_b = dist_b.reindex(all_entities, fill_value=0)
 
-    return distrib_a, distrib_b
+    return dist_a, dist_b
 
 
 # Entity distribution drift (Jensen–Shannon)
 # → change in entity type
 def drift_js(df_a, df_b):
-    distrib_a, distrib_b = entity_distribution(df_a, df_b)
-    return jensenshannon(distrib_a.values, distrib_b.values)
+    dist_a, dist_b = entity_distribution(df_a, df_b)
+    return jensenshannon(dist_a.values, dist_b.values)
 
 
 # KL divergence
@@ -118,8 +118,8 @@ def kl_divergence(a, b, epsilon=1e-12):
 
 
 def drift_kl(df_a, df_b):
-    distrib_a, distrib_b = entity_distribution(df_a, df_b)
-    return kl_divergence(distrib_a.values, distrib_b.values)
+    dist_a, dist_b = entity_distribution(df_a, df_b)
+    return kl_divergence(dist_a.values, dist_b.values)
 
 
 #----------    OOV / new tokens (or entities)    -----------#

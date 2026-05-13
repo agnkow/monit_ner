@@ -84,8 +84,8 @@ def comparision_pos(df_a, df_b, name_a, name_b):
     """
 
     pos_sum = pd.DataFrame()
-    pos_a = df_a['pos_distrib'].apply(pd.Series).fillna(0)
-    pos_b = df_b['pos_distrib'].apply(pd.Series).fillna(0)
+    pos_a = df_a['pos_dist'].apply(pd.Series).fillna(0)
+    pos_b = df_b['pos_dist'].apply(pd.Series).fillna(0)
 
     pos_sum[name_a] = pos_a.mean().round(2)
     pos_sum[name_b] = pos_b.mean().round(2)

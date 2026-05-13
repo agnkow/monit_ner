@@ -33,7 +33,7 @@ def tokens_sents_per_doc(text, nlp_spacy):
         'entities_per_sent': entities_per_sent(doc),
         'mean_length_word': mean_len_word_per_doc(doc),
         'pos': pos_per_doc(doc),
-        'pos_distrib': pos_distrib_per_doc(doc),
+        'pos_dist': pos_dist_per_doc(doc),
         'mean_length_ent': mean_len_ent_per_doc(doc)
     }
 
@@ -131,7 +131,6 @@ def entities_per_sent(doc):
     entities_list = []
     for sent in doc.sents:
         entities = 0
-        tokens = 0
         for token in sent:
             if token.ent_type_:
                 entities += 1
@@ -160,7 +159,7 @@ def pos_per_doc(doc):
     return dict(Counter(pos))
 
 
-def pos_distrib_per_doc(doc):
+def pos_dist_per_doc(doc):
 
     pos_counts = pos_per_doc(doc)
     total = sum(pos_counts.values())
