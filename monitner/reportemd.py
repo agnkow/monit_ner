@@ -28,10 +28,11 @@ def data_emb_report(
     # Token embedding centroid drift
     t_centroid_drift = token_centroid_drift(df_token_a, df_token_b)
     print("Token embedding centroid drift:", round(t_centroid_drift, 3))
+    print('\n')
 
     # OOV / new tokens
     print("OOV rate (tokeny):", oov_rate(df_token_a, df_token_b, 'token_lower'))
-
+    print('\n')
 
     # --------------- Entities ---------------
     # Only non-entity tokens

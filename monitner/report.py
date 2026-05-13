@@ -30,13 +30,16 @@ def data_drift_report(df_a, df_b, name_a, name_b):
 
 
 def compare_vars_per_token(df_a, df_b, name_a, name_b):
+
     df_ratio = pd.DataFrame()
     df_ratio = vars_per_token(df_a, df_ratio, name_a)
     df_ratio = vars_per_token(df_b, df_ratio, name_b)
+
     return df_ratio
 
 
 def vars_per_token(df, df_sum, set_name):
+
     vars = [
     'words',
     'punctuation',
@@ -48,17 +51,21 @@ def vars_per_token(df, df_sum, set_name):
     var_sum = df[vars].sum()
     tokens_sum = df['tokens'].sum()
     df_sum[set_name] = round(var_sum / tokens_sum, 2)
+
     return df_sum
 
 
 def compare_mean_var_per_doc(df_a, df_b, name_a, name_b):
+
     df_ratio = pd.DataFrame()
     df_ratio = mean_var_per_doc(df_a, df_ratio, name_a)
     df_ratio = mean_var_per_doc(df_b, df_ratio, name_b)
+
     return df_ratio
 
 
 def mean_var_per_doc(df, df_sum, set_name):
+
     vars = [
         'tokens',
         'words',
@@ -67,6 +74,7 @@ def mean_var_per_doc(df, df_sum, set_name):
         ]
     var_mean = df[vars].mean().astype(int)
     df_sum[set_name] = var_mean
+
     return df_sum
 
 
@@ -81,6 +89,7 @@ def comparision_pos(df_a, df_b, name_a, name_b):
 
     pos_sum[name_a] = pos_a.mean().round(2)
     pos_sum[name_b] = pos_b.mean().round(2)
+
     return pos_sum
 
 
@@ -106,4 +115,5 @@ def ks_stats_var_per_sent(df_a, df_b):
 
     ks_stats_df = pd.DataFrame(ks_stats)
     ks_stats_df.set_index('var', inplace=True)
+
     return ks_stats_df

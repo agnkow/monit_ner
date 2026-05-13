@@ -43,6 +43,7 @@ def extract_tokens_vectors(
 
 #----------------    Centroid drift    -----------------#
 def centroid_vecs(vectors):
+
     if len(vectors) == 0:
         return None
 
@@ -51,15 +52,18 @@ def centroid_vecs(vectors):
 
     if vecs.shape[0] == 0:
         return None
+
     return vecs.mean(axis=0)
 
 
 def centroid_drift(a, b):
+
     ca = centroid_vecs(a)
     cb = centroid_vecs(b)
 
     if ca is None or cb is None:
         return np.nan
+
     return 1 - cosine_similarity([ca],[cb])[0][0]
 
 
@@ -70,16 +74,19 @@ def token_centroid_drift(df_a, df_b):
 
 # entities
 def entity_centroid_drift(df_a, df_b, label):
+
     vecs_a = df_a[df_a.entity == label].vector.values
     vecs_b = df_b[df_b.entity == label].vector.values
 
     if len(vecs_a) == 0 or len(vecs_b) == 0:
         return np.nan
+
     return centroid_drift(vecs_a, vecs_b)
 
 
 #----------------   Distribution drift    -----------------#
 def entity_distribution(df_a, df_b):
+
     distrib_a = df_a.entity.value_counts(normalize=True)
     distrib_b = df_b.entity.value_counts(normalize=True)
 
@@ -87,6 +94,7 @@ def entity_distribution(df_a, df_b):
 
     distrib_a = distrib_a.reindex(all_entities, fill_value=0)
     distrib_b = distrib_b.reindex(all_entities, fill_value=0)
+
     return distrib_a, distrib_b
 
 
@@ -99,11 +107,13 @@ def drift_js(df_a, df_b):
 
 # KL divergence
 def kl_divergence(a, b, epsilon=1e-12):
+
     a = np.asarray(a) + epsilon
     b = np.asarray(b) + epsilon
 
     a = a / a.sum()
     b = b / b.sum()
+
     return np.sum(a * np.log(a / b))
 
 
@@ -112,9 +122,11 @@ def drift_kl(df_a, df_b):
     return kl_divergence(distrib_a.values, distrib_b.values)
 
 
-#----------    OOV / nowe tokeny (lub encje)    -----------#
+#----------    OOV / new tokens (or entities)    -----------#
 def oov_rate(df_a, df_b, token_lower):
+
     vocab_a = set(df_a[token_lower])
     vocab_b  = set(df_b[token_lower])
     new_tokens = vocab_b - vocab_a
+
     return len(new_tokens) / len(vocab_b)
