@@ -1,8 +1,19 @@
 import pandas as pd
 from scipy.stats import ks_2samp
 
+from monitner.datadrift import properties_text
 
-def data_drift_report(df_a, df_b, name_a, name_b):
+
+def data_drift_report(
+        df_a,
+        df_b,
+        name_a,
+        name_b,
+        nlp
+):
+
+    df_a = properties_text(df_a, 'text', nlp)
+    df_b = properties_text(df_b, 'text', nlp)
 
     print('Proportion of words, punctuation marks, digits, \
     symbols, capitalized words, and entities in documents.')
